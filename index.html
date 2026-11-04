@@ -1,0 +1,387 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking Products Dashboard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <aside class="sidebar">
+        <div class="brand">
+            <i class="bi bi-bank2"></i>
+            <span>HPBank</span>
+        </div>
+
+        <p class="menu-heading">MENU</p>
+
+        <a href="#" class="menu-item active">
+            <i class="bi bi-grid"></i> Dashboard
+        </a>
+
+        <a href="#products" class="menu-item">
+            <i class="bi bi-wallet2"></i> My Products
+        </a>
+
+       <a href="#" class="menu-item" data-bs-toggle="modal" data-bs-target="#transactionsModal">
+    <i class="bi bi-arrow-left-right"></i> Transactions
+</a>
+
+<a href="#" class="menu-item" data-bs-toggle="modal" data-bs-target="#settingsModal">
+    <i class="bi bi-gear"></i> Settings
+</a>
+
+        <div class="sidebar-bottom">
+            <div class="profile">
+                <div class="avatar">HR</div>
+                <div>
+                    <strong>Harini R</strong>
+                    <small>Premium Customer</small>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <h5>Banking Products</h5>
+                <small>Welcome back, Harini!</small>
+            </div>
+
+           <div class="topbar-right">
+
+    <div class="notification-wrapper">
+        <button class="notification" id="notificationBtn">
+            <i class="bi bi-bell"></i>
+            <span class="notification-dot"></span>
+        </button>
+
+        <div class="notification-popup" id="notificationPopup">
+            <h6>Notifications</h6>
+
+            <div class="notification-item">
+                <i class="bi bi-check-circle-fill text-success"></i>
+                <div>
+                    <strong>Payment Successful</strong>
+                    <small>Your recent payment was completed.</small>
+                </div>
+            </div>
+
+            <div class="notification-item">
+                <i class="bi bi-clock-fill text-warning"></i>
+                <div>
+                    <strong>Application Pending</strong>
+                    <small>Your investment application is under review.</small>
+                </div>
+            </div>
+
+            <div class="notification-item">
+                <i class="bi bi-info-circle-fill text-primary"></i>
+                <div>
+                    <strong>Account Update</strong>
+                    <small>Your banking profile is up to date.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="avatar profile-button"
+            data-bs-toggle="modal"
+            data-bs-target="#settingsModal">
+        HR
+    </button>
+
+</div>
+        </header>
+
+        <section class="welcome-section">
+            <div>
+                <h2>Manage Your Banking Products</h2>
+                <p>View and manage all your financial products in one place.</p>
+            </div>
+
+           <button class="primary-btn" data-bs-toggle="modal" data-bs-target="#applyModal">
+    <i class="bi bi-plus-lg"></i> Apply for Product
+</button>
+        </section>
+
+        <section class="summary-grid">
+
+            <div class="summary-card">
+                <div class="summary-icon blue">
+                    <i class="bi bi-wallet2"></i>
+                </div>
+                <div>
+                    <p>Total Products</p>
+                    <h3 id="totalProducts">4</h3>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <div class="summary-icon green">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+                <div>
+                    <p>Active Products</p>
+                    <h3 id="activeProducts">3</h3>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <div class="summary-icon orange">
+                    <i class="bi bi-clock-history"></i>
+                </div>
+                <div>
+                    <p>Pending Products</p>
+                    <h3 id="pendingProducts">1</h3>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="products-section" id="products">
+
+            <div class="section-heading">
+                <div>
+                    <h3>Your Products</h3>
+                    <p>Explore all your banking products</p>
+                </div>
+            </div>
+
+            <div class="filter-section">
+
+                <div class="filter-section">
+
+    <div class="search-box">
+        <i class="bi bi-search"></i>
+        <input type="text" id="searchInput"
+               placeholder="Search products, category, status...">
+    </div>
+
+   
+    <select id="statusFilter" class="form-select status-filter">
+        <option value="all">All Status</option>
+        <option value="active">Active</option>
+        <option value="pending">Pending</option>
+    </select>
+
+</div>
+
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-category="all">All</button>
+                    <button class="filter-btn" data-category="savings">Savings</button>
+                    <button class="filter-btn" data-category="card">Cards</button>
+                    <button class="filter-btn" data-category="loan">Loans</button>
+                    <button class="filter-btn" data-category="wealth">Wealth</button>
+                </div>
+
+            </div>
+
+            <div class="product-grid" id="productContainer">
+
+            </div>
+
+            <p id="noResults" class="no-results" style="display:none;">
+                No products found.
+            </p>
+
+        </section>
+
+        <footer>
+            © 2026 HPBank. All rights reserved.
+        </footer>
+
+    </main>
+
+</div>
+
+<div class="modal fade" id="productModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Product Details</h5>
+                <button type="button" class="btn-close"
+                        data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body" id="modalContent">
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="transactionsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Recent Transactions</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Salary Credit</td>
+                            <td>04 Nov 2026</td>
+                            <td>+ ₹45,000</td>
+                            <td><span class="badge bg-success">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td>Online Shopping</td>
+                            <td>03 Nov 2026</td>
+                            <td>- ₹2,500</td>
+                            <td><span class="badge bg-success">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td>Electricity Bill</td>
+                            <td>02 Nov 2026</td>
+                            <td>- ₹1,200</td>
+                            <td><span class="badge bg-warning text-dark">Pending</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="settingsModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Account Settings</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <h6>Profile Information</h6>
+                <p><strong>Name:</strong> Harini R</p>
+                <p><strong>Email:</strong> harini@example.com</p>
+
+                <hr>
+
+                <h6>Preferences</h6>
+
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input" type="checkbox" id="notifications" checked>
+                    <label class="form-check-label" for="notifications">
+                        Enable Notifications
+                    </label>
+                </div>
+
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="statements">
+                    <label class="form-check-label" for="statements">
+                        Email Monthly Statements
+                    </label>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+               <button type="button" class="btn btn-primary" onclick="saveSettings()">
+    Save Changes
+</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="applyModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Apply for a Banking Product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <form id="applicationForm">
+
+                    <div class="mb-3">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-control"
+                               id="appName" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" class="form-control"
+                               id="appEmail" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control"
+                               id="appPhone" placeholder="Enter your phone number"
+                               pattern="[0-9]{10}" maxlength="10" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Select Product</label>
+                        <select class="form-select" id="appProduct" required>
+                            <option value="">Choose a product</option>
+                            <option value="Savings Account">Savings Account</option>
+                            <option value="Credit Card">Credit Card</option>
+                            <option value="Home Loan">Home Loan</option>
+                            <option value="Wealth Management">Wealth Management</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Additional Details</label>
+                        <textarea class="form-control" id="appDetails"
+                                  rows="3" placeholder="Enter additional details"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">
+                        Submit Application
+                    </button>
+
+                </form>
+
+                <div id="applicationSuccess" class="text-center" style="display:none;">
+                    <i class="bi bi-check-circle-fill text-success"
+                       style="font-size: 50px;"></i>
+                    <h5 class="mt-3 text-success">Application Submitted!</h5>
+                    <p class="text-muted">
+                        Your product application has been submitted successfully.
+                        Our team will contact you soon.
+                    </p>
+                    <button type="button" class="btn btn-success"
+                            data-bs-dismiss="modal">
+                        Done
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
